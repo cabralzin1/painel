@@ -1,102 +1,72 @@
 # Financiamento de Campanha — Eleição Presidencial 2026
 
-Projeto de dados que consolida receitas e despesas declaradas pelos candidatos à
-Presidência da República na Justiça Eleitoral, e apresenta os números em um painel.
+Painel com a **despesa contratada declarada** pelos candidatos à Presidência,
+a partir dos Dados Abertos do TSE. O painel **mede**, não opina: todos os
+candidatos recebem o mesmo tratamento.
 
-O painel **mede**, não opina. Todos os candidatos recebem o mesmo tratamento, sem
-recorte, destaque ou texto interpretativo. Qualquer leitura fica por conta de quem olha.
+Disciplina de Projeto de Software. Ordem das sprints: front-end → back-end → banco → integrado.
 
-Projeto da disciplina de Projeto de Software.
+Repositório: https://github.com/cabralzin1/painel
 
 ## Integrantes
 
 | Nome | RA |
 | ---- | -- |
-| _(preencher)_ | _(preencher)_ |
+| Guilherme Cabral | 2403377 |
 
-- Board do projeto: _(colar link público do ClickUp)_
+- Board: https://app.clickup.com/90171389193/v/li/901715205335
 - Vídeo da Sprint 1: _(colar link)_
 
-## Fonte dos dados
+## Como executar (Sprint 1)
 
-Portal de Dados Abertos do TSE — conjunto **Prestação de Contas Eleitorais 2026**
-e conjunto **Candidatos 2026**.
+Não há instalação, build nem banco. O professor (ou qualquer pessoa) só precisa
+abrir o front no navegador:
 
-- https://dadosabertos.tse.jus.br/dataset/prestacao-de-contas-eleitorais-2026
-- https://dadosabertos.tse.jus.br/dataset/candidatos-2026
+1. Clone ou baixe o ZIP do repositório
+2. Abra o arquivo `painel/index.html` (duplo clique, ou arraste para o Chrome/Edge/Brave)
 
-Os dados não são versionados neste repositório (são grandes demais). Baixe os zips
-e coloque em `dados/brutos/`.
-
-### Limitação importante
-
-Durante o período eleitoral o TSE publica **prestações de contas parciais**: os valores
-aparecem à medida que candidatos e partidos declaram. As contas finais só são entregues
-e analisadas após o pleito.
-
-Ou seja, os números deste painel representam o que foi **declarado até a data da carga**,
-não o gasto total da campanha. A data da última carga é exibida no painel e essa
-ressalva deve aparecer junto dos números, não escondida no rodapé.
-
-## Como executar
-
-Sprint 1 (front-end): abra `painel/index.html` no navegador, sem instalar nada.
-O painel publicado no GitHub Pages sobe automaticamente a cada push em `main`.
-
-```bash
-# Carga dos dados do TSE (sprints seguintes)
-python dados/01_inspecionar.py dados/gastos_campanhas/dados/brutos
-python dados/02_carregar.py
-```
-
-O passo 1 existe porque o TSE muda nomes de coluna entre eleições. Rode-o antes de
-qualquer transformação e confira o layout real em vez de supor.
-
-## Estrutura
+Os números da carga já estão em `painel/js/data.js`. **Não é necessário** baixar os
+CSVs do TSE nem rodar Python para avaliar esta sprint.
 
 ```
-gastos-campanha/
-├── dados/
-│   ├── brutos/        zips e csvs baixados do TSE (fora do git)
-│   └── campanha.db    banco SQLite gerado pela carga
-├── scripts/
-│   ├── 01_inspecionar.py
-│   └── 02_carregar.py
-├── painel/            dashboard
-└── docs/              decisões de modelagem e roteiro do vídeo
+painel/
+├── index.html     estrutura
+├── css/style.css  estilos
+└── js/
+    ├── data.js    dados agregados da carga TSE (na Sprint 2 vira API)
+    └── app.js     filtros, ordenação, comparação e validação
 ```
 
-## Funcionalidades por sprint
+A tela só conversa com o objeto `Dados`. Na Sprint 2, a API troca a implementação
+de `data.js`; o HTML não muda.
 
-### Sprint 1 — Ingestão e primeira visão (entrega 14/09)
+## O que os números representam
 
-- [ ] Download e inspeção dos arquivos do TSE
-- [ ] Pipeline de carga: leitura, normalização de encoding e tipos
-- [ ] Filtro dos candidatos ao cargo de Presidente
-- [ ] Carga em banco relacional com modelo dimensional
-- [ ] Primeira visão: despesa declarada por candidato
+Despesa contratada **declarada até 12/09/2026** (`DT_GERACAO` do arquivo TSE),
+não o gasto total da campanha. Recorte: cargo Presidente (`CD_CARGO = 1`) no
+consolidado `BRASIL`. Quem declarou zero também entra na lista.
 
-### Sprint 2 — Modelo e regras (entrega 13/10)
+Metodologia (incluindo os achados sobre `SQ_DESPESA` e os dois tipos de
+prestação): `dados/metodologia.md`.
 
-- [ ] Dimensões de candidato, partido, fornecedor, categoria e tempo
-- [ ] Tabela fato de receitas e tabela fato de despesas
-- [ ] Tratamento de fornecedores duplicados por CNPJ
-- [ ] Indicadores: concentração por fornecedor, participação do fundo eleitoral
+## Sprints
 
-### Sprint 3 — Banco e consultas (entrega 08/11)
+### Sprint 1 — Front-end (entrega 14/09)
 
-- [ ] Scripts DDL versionados e carga incremental
-- [ ] Views de apoio para o painel
-- [ ] Controle de qualidade: contagem de registros e soma por origem
+- [x] Despesa declarada por candidato (valor + lançamentos)
+- [x] Resumo da carga e ressalva de prestação parcial junto dos números
+- [x] Busca, filtro por partido e tipo de prestação, ordenação
+- [x] Origens de despesa por candidato
+- [x] Comparação de dois candidatos, com validação no front
 
-### Entrega final — Painel integrado (22/11)
+### Sprint 2 — Back-end (entrega 13/10)
 
-- [ ] Painel com filtro por candidato, período e categoria de despesa
-- [ ] Comparação entre candidatos com o mesmo critério
-- [ ] Atualização da carga com as contas finais pós-pleito
-- [ ] Documentação de metodologia e limitações
+- [ ] API REST; `data.js` passa a usar `fetch()`
 
-## Metodologia
+### Sprint 3 — Banco (entrega 08/11)
 
-Decisões que afetam os números estão registradas em `docs/metodologia.md`. Qualquer
-critério de recorte, exclusão ou agrupamento deve ser escrito lá antes de ser aplicado.
+- [ ] SQLite e views de apoio (`dados/02_carregar.py`)
+
+### Entrega final (22/11)
+
+- [ ] Painel integrado com carga atualizada pós-pleito
