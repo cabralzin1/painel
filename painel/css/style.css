@@ -1,0 +1,493 @@
+/* =========================================================
+   Financiamento de Campanha — painel (Sprint 1)
+   Paleta: papel frio + tinta naval, acento verde-petróleo.
+   Barras e cores de tipo são escala, não ranking editorial.
+   ========================================================= */
+
+:root {
+  --papel: #eff1f4;
+  --superficie: #ffffff;
+  --tinta: #16202b;
+  --tinta-fraca: #5c6b7a;
+  --linha: #d6dce3;
+  --acento: #0f5257;
+  --acento-escuro: #0a3b3f;
+  --aviso: #9a6508;
+  --aviso-fundo: #fdf4e3;
+  --reprovada: #a32e2e;
+  --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'IBM Plex Mono', 'SF Mono', Consolas, 'Courier New', monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+ul {
+  margin: 0;
+}
+
+a {
+  color: var(--acento);
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+.topo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px 32px;
+  background: var(--superficie);
+  border-bottom: 1px solid var(--linha);
+}
+
+.topo__marca {
+  display: flex;
+  flex-direction: column;
+}
+
+.topo__nome {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.topo__org {
+  font-size: 13px;
+  color: var(--tinta-fraca);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 24px;
+  max-width: 1320px;
+}
+
+.fila__bloco dt {
+  font-size: 12px;
+  color: var(--tinta-fraca);
+  margin-bottom: 2px;
+}
+
+.fila__numero {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.fila__numero--data {
+  font-size: 18px;
+}
+
+.aviso {
+  max-width: 1320px;
+  margin: 18px auto 0;
+  padding: 12px 16px;
+  background: var(--aviso-fundo);
+  border-left: 3px solid var(--aviso);
+  border-radius: 0 4px 4px 0;
+  font-size: 13px;
+  color: #6d4a10;
+}
+
+.aviso strong {
+  color: var(--aviso);
+}
+
+.conteudo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 24px;
+  align-items: start;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 24px 32px 48px;
+}
+
+.coluna {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.painel {
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: 6px;
+  padding: 24px;
+}
+
+.painel__titulo {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.painel__apoio {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--tinta-fraca);
+  max-width: 62ch;
+}
+
+.lista__cabecalho {
+  margin-bottom: 18px;
+}
+
+.controles {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 0.9fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.campo {
+  margin-bottom: 14px;
+}
+
+.campo label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  padding: 9px 11px;
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color: var(--acento);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(15, 82, 87, 0.12);
+}
+
+.campo--invalido input,
+.campo--invalido select {
+  border-color: var(--reprovada);
+}
+
+.erro {
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--reprovada);
+}
+
+.contagem {
+  margin: 8px 0 12px;
+  font-size: 12px;
+  color: var(--tinta-fraca);
+}
+
+.candidato {
+  border: 1px solid var(--linha);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 13px 16px 12px;
+}
+
+.candidato__topo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 16px;
+  align-items: center;
+}
+
+.candidato__nome {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.candidato__meta {
+  font-size: 12px;
+  color: var(--tinta-fraca);
+}
+
+.candidato__numeros {
+  text-align: right;
+}
+
+.candidato__valor {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.barra {
+  margin-top: 10px;
+  height: 6px;
+  background: var(--papel);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.barra span {
+  display: block;
+  height: 100%;
+  background: var(--acento);
+  border-radius: 99px;
+}
+
+.candidato__detalhe {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--linha);
+}
+
+.expandir {
+  padding: 4px 8px;
+  background: none;
+  border: 1px solid var(--linha);
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--tinta-fraca);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.expandir:hover {
+  border-color: var(--acento);
+  color: var(--acento);
+}
+
+.lista__vazia {
+  padding: 40px 16px;
+  border: 1px dashed var(--linha);
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--tinta-fraca);
+}
+
+.acoes {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 4px 0 8px;
+}
+
+.botao {
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.botao--primario {
+  padding: 10px 18px;
+  background: var(--acento);
+  border: 1px solid var(--acento);
+  color: #fff;
+}
+
+.botao--primario:hover {
+  background: var(--acento-escuro);
+  border-color: var(--acento-escuro);
+}
+
+.botao--texto {
+  padding: 10px 8px;
+  background: none;
+  border: none;
+  color: var(--tinta-fraca);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.botao--texto:hover {
+  color: var(--tinta);
+}
+
+.comparacao {
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+.comparacao .tabela-itens td:first-child {
+  white-space: normal;
+}
+
+.comparacao__pares {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.comparacao__pares article {
+  padding: 10px 12px;
+  background: var(--papel);
+  border-radius: 4px;
+}
+
+.comparacao__pares h3 {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.comparacao__pares p {
+  font-size: 12px;
+  color: var(--tinta-fraca);
+}
+
+.comparacao__valor {
+  margin-top: 6px !important;
+  font-family: var(--mono);
+  font-size: 14px !important;
+  color: var(--tinta) !important;
+}
+
+.tabela-itens {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tabela-itens th {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--linha);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--tinta-fraca);
+  text-align: left;
+}
+
+.tabela-itens td {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--linha);
+}
+
+.tabela-itens .numero {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tabela-itens th.numero {
+  text-align: right;
+}
+
+.metodo {
+  margin-top: 12px;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--tinta-fraca);
+}
+
+.metodo li + li {
+  margin-top: 8px;
+}
+
+.metodo code {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--tinta);
+}
+
+.rodape {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px 40px;
+  font-size: 12px;
+  color: var(--tinta-fraca);
+}
+
+.rodape code {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+@media (max-width: 1040px) {
+  .conteudo {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .controles {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .topo {
+    padding: 16px;
+  }
+
+  .fila {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aviso,
+  .rodape {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .rodape {
+    padding: 0 0 32px;
+  }
+
+  .candidato__topo {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .controles {
+    grid-template-columns: 1fr;
+  }
+
+  .fila {
+    gap: 18px;
+  }
+
+  .comparacao__pares {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

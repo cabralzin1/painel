@@ -1,0 +1,20 @@
+# Dados brutos do TSE — grandes demais para o Git
+*.csv
+*.zip
+*.db
+*.sqlite
+dados/gastos_campanhas/
+
+# Python
+__pycache__/
+.venv/
+venv/
+*.pyc
+
+# Segredos e lixo local
+.env
+.env.*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

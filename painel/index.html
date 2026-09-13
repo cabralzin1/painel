@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Financiamento de Campanha — Presidência 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header class="topo">
+      <div class="topo__marca">
+        <span class="topo__nome">Financiamento de Campanha</span>
+        <span class="topo__org">Eleição Presidencial 2026 · despesa contratada declarada</span>
+      </div>
+
+      <dl class="fila" aria-label="Resumo da carga">
+        <div class="fila__bloco">
+          <dt>Total declarado</dt>
+          <dd id="resumoTotal" class="fila__numero">R$ 0,00</dd>
+        </div>
+        <div class="fila__bloco">
+          <dt>Candidatos</dt>
+          <dd id="resumoCandidatos" class="fila__numero">0</dd>
+        </div>
+        <div class="fila__bloco">
+          <dt>Lançamentos</dt>
+          <dd id="resumoLancamentos" class="fila__numero">0</dd>
+        </div>
+        <div class="fila__bloco">
+          <dt>Geração TSE</dt>
+          <dd id="resumoGeracao" class="fila__numero fila__numero--data">—</dd>
+        </div>
+      </dl>
+    </header>
+
+    <div class="aviso" role="note">
+      <strong>Prestação parcial.</strong>
+      Os valores são despesa contratada <em>declarada até a data da carga</em>, não o gasto
+      total da campanha. A diferença entre candidatos pode refletir ritmo de declaração
+      tanto quanto volume de gasto. Fonte:
+      <a href="https://dadosabertos.tse.jus.br/dataset/prestacao-de-contas-eleitorais-2026"
+        >Dados Abertos do TSE</a
+      >.
+    </div>
+
+    <main class="conteudo">
+      <section class="painel" aria-labelledby="tituloLista">
+        <div class="lista__cabecalho">
+          <div>
+            <h1 id="tituloLista" class="painel__titulo">Despesa declarada por candidato</h1>
+            <p class="painel__apoio">
+              Recorte: cargo Presidente. Todos os candidatos do arquivo entram, inclusive
+              os que declararam zero. O painel mede; não interpreta.
+            </p>
+          </div>
+        </div>
+
+        <div class="controles">
+          <div class="campo campo--busca">
+            <label for="busca">Buscar</label>
+            <input
+              type="search"
+              id="busca"
+              placeholder="Nome, número ou partido"
+              autocomplete="off" />
+          </div>
+
+          <div class="campo">
+            <label for="filtroPartido">Partido</label>
+            <select id="filtroPartido">
+              <option value="">Todos</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="filtroPrestacao">Tipo de prestação</label>
+            <select id="filtroPrestacao">
+              <option value="">Todos</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="ordenar">Ordenar por</label>
+            <select id="ordenar">
+              <option value="total">Maior valor</option>
+              <option value="lancamentos">Mais lançamentos</option>
+              <option value="nome">Nome</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="contagem" id="contagemLista"></p>
+        <div id="listaCandidatos" class="lista"></div>
+      </section>
+
+      <aside class="coluna">
+        <section class="painel" aria-labelledby="tituloComparar">
+          <h2 id="tituloComparar" class="painel__titulo">Comparar dois candidatos</h2>
+          <p class="painel__apoio">
+            Mesmo recorte, mesmos critérios. Escolha dois nomes distintos.
+          </p>
+
+          <div class="campo">
+            <label for="compararA">Candidato A</label>
+            <select id="compararA">
+              <option value="">Selecione</option>
+            </select>
+            <p class="erro" id="erroCompararA" hidden></p>
+          </div>
+
+          <div class="campo">
+            <label for="compararB">Candidato B</label>
+            <select id="compararB">
+              <option value="">Selecione</option>
+            </select>
+            <p class="erro" id="erroCompararB" hidden></p>
+          </div>
+
+          <div class="acoes">
+            <button type="button" class="botao botao--primario" id="botaoComparar">
+              Comparar
+            </button>
+            <button type="button" class="botao botao--texto" id="limparComparacao">
+              Limpar
+            </button>
+          </div>
+
+          <p class="erro" id="erroComparar" hidden></p>
+          <div id="resultadoComparacao" class="comparacao" hidden></div>
+        </section>
+
+        <section class="painel" aria-labelledby="tituloMetodo">
+          <h2 id="tituloMetodo" class="painel__titulo">Metodologia desta carga</h2>
+          <ul class="metodo">
+            <li>
+              Arquivo consolidado <code>BRASIL</code>: contém duas eleições; o filtro
+              <code>CD_CARGO = 1</code> isola a disputa presidencial.
+            </li>
+            <li>
+              <code>SQ_DESPESA</code> não é chave única. Deduplicar por ele apagaria
+              lançamentos legítimos (cerca de R$ 4,2 mi nesta base).
+            </li>
+            <li>
+              Relatório Financeiro e Parcial não se sobrepõem: nenhum candidato aparece
+              nos dois. Os totais podem ser somados.
+            </li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="rodape">
+      <p>
+        Sprint 1 — interface e recorte no front-end. Os números vêm de
+        <code>js/data.js</code> (agregado da carga validada) e serão substituídos pela
+        API na Sprint 2. Período das despesas nesta carga:
+        <span id="periodoDespesas">—</span>.
+      </p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

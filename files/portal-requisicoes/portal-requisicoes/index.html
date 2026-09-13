@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal de Requisições de Compra</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header class="topo">
+      <div class="topo__marca">
+        <span class="topo__nome">Portal de Requisições</span>
+        <span class="topo__org">Suprimentos · Matriz</span>
+      </div>
+
+      <dl class="fila" aria-label="Resumo da fila de aprovação">
+        <div class="fila__bloco">
+          <dt>Aguardando aprovação</dt>
+          <dd id="resumoPendentes" class="fila__numero">0</dd>
+        </div>
+        <div class="fila__bloco">
+          <dt>Valor em análise</dt>
+          <dd id="resumoValor" class="fila__numero">R$ 0,00</dd>
+        </div>
+      </dl>
+    </header>
+
+    <main class="conteudo">
+      <!-- ------------------------- Formulário ------------------------- -->
+      <section class="painel" aria-labelledby="tituloForm">
+        <h1 id="tituloForm" class="painel__titulo">Nova requisição</h1>
+        <p class="painel__apoio">
+          Descreva o que precisa ser comprado. A requisição segue para aprovação do
+          responsável pelo centro de custo.
+        </p>
+
+        <div class="campo">
+          <label for="solicitante">Solicitante</label>
+          <input type="text" id="solicitante" placeholder="Nome completo" autocomplete="name" />
+          <p class="erro" id="erroSolicitante" hidden></p>
+        </div>
+
+        <div class="campo-duplo">
+          <div class="campo">
+            <label for="centroCusto">Centro de custo</label>
+            <select id="centroCusto">
+              <option value="">Selecione</option>
+            </select>
+            <p class="erro" id="erroCentroCusto" hidden></p>
+          </div>
+
+          <div class="campo">
+            <label for="categoria">Categoria</label>
+            <select id="categoria">
+              <option value="">Selecione</option>
+            </select>
+            <p class="erro" id="erroCategoria" hidden></p>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="dataNecessidade">Data em que é necessário</label>
+          <input type="date" id="dataNecessidade" />
+          <p class="erro" id="erroDataNecessidade" hidden></p>
+        </div>
+
+        <div class="campo">
+          <label for="justificativa">Justificativa</label>
+          <textarea
+            id="justificativa"
+            rows="3"
+            placeholder="Por que esta compra é necessária?"></textarea>
+          <p class="erro" id="erroJustificativa" hidden></p>
+        </div>
+
+        <!-- Itens -->
+        <div class="itens">
+          <div class="itens__cabecalho">
+            <h2>Itens</h2>
+            <button type="button" class="botao botao--discreto" id="adicionarItem">
+              Adicionar item
+            </button>
+          </div>
+
+          <div id="listaItens"></div>
+          <p class="erro" id="erroItens" hidden></p>
+
+          <div class="itens__total">
+            <span>Total da requisição</span>
+            <strong id="totalFormulario">R$ 0,00</strong>
+          </div>
+        </div>
+
+        <div class="acoes">
+          <button type="button" class="botao botao--primario" id="enviarRequisicao">
+            Enviar para aprovação
+          </button>
+          <button type="button" class="botao botao--texto" id="limparFormulario">
+            Limpar
+          </button>
+        </div>
+
+        <p class="confirmacao" id="confirmacao" hidden role="status"></p>
+      </section>
+
+      <!-- ------------------------- Listagem ------------------------- -->
+      <section class="painel painel--lista" aria-labelledby="tituloLista">
+        <div class="lista__cabecalho">
+          <h1 id="tituloLista" class="painel__titulo">Requisições</h1>
+
+          <div class="filtros" role="group" aria-label="Filtrar por situação">
+            <button type="button" class="filtro filtro--ativo" data-filtro="todas">Todas</button>
+            <button type="button" class="filtro" data-filtro="pendente">Pendentes</button>
+            <button type="button" class="filtro" data-filtro="aprovada">Aprovadas</button>
+            <button type="button" class="filtro" data-filtro="reprovada">Reprovadas</button>
+          </div>
+        </div>
+
+        <div id="listaRequisicoes" class="lista"></div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <p>
+        Sprint 1 — interface e regras de validação no front-end. Os dados são carregados de
+        <code>js/data.js</code> e serão substituídos pela API na Sprint 2.
+      </p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
