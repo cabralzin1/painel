@@ -22,6 +22,229 @@ const CARGA = {
     "inicio": "2026-08-01",
     "fim": "2026-09-10"
   },
+  "por_mes": [
+    {
+      "mes": "2026-08",
+      "lancamentos": 806,
+      "total": 94016625.21
+    },
+    {
+      "mes": "2026-09",
+      "lancamentos": 209,
+      "total": 6265960.37
+    }
+  ],
+  "origens_gerais": [
+    {
+      "origem": "Serviços prestados por terceiros",
+      "lancamentos": 157,
+      "total": 64085200.05
+    },
+    {
+      "origem": "Produção de programas de rádio, televisão ou vídeo",
+      "lancamentos": 34,
+      "total": 10273520.55
+    },
+    {
+      "origem": "Publicidade por adesivos",
+      "lancamentos": 109,
+      "total": 6281792.6
+    },
+    {
+      "origem": "Serviços advocatícios",
+      "lancamentos": 10,
+      "total": 4880000.0
+    },
+    {
+      "origem": "Despesas com transporte ou deslocamento",
+      "lancamentos": 33,
+      "total": 4047703.91
+    },
+    {
+      "origem": "Publicidade por materiais impressos",
+      "lancamentos": 129,
+      "total": 3203444.93
+    },
+    {
+      "origem": "Serviços contábeis",
+      "lancamentos": 6,
+      "total": 1510000.0
+    },
+    {
+      "origem": "Despesa com Impulsionamento de Conteúdos",
+      "lancamentos": 23,
+      "total": 1359700.0
+    },
+    {
+      "origem": "Locação/cessão de bens imóveis",
+      "lancamentos": 5,
+      "total": 877131.26
+    },
+    {
+      "origem": "Pesquisas ou testes eleitorais",
+      "lancamentos": 2,
+      "total": 805000.0
+    },
+    {
+      "origem": "Eventos de promoção da candidatura",
+      "lancamentos": 14,
+      "total": 708827.6
+    },
+    {
+      "origem": "Passagem Aérea",
+      "lancamentos": 199,
+      "total": 669427.61
+    },
+    {
+      "origem": "Despesas com pessoal",
+      "lancamentos": 20,
+      "total": 484876.99
+    },
+    {
+      "origem": "Locação/cessão de bens móveis (exceto veículos)",
+      "lancamentos": 6,
+      "total": 276432.23
+    },
+    {
+      "origem": "Diversas a especificar",
+      "lancamentos": 15,
+      "total": 260195.81
+    },
+    {
+      "origem": "Despesas com Hospedagem",
+      "lancamentos": 67,
+      "total": 216498.89
+    },
+    {
+      "origem": "Produção de jingles, vinhetas e slogans",
+      "lancamentos": 5,
+      "total": 173600.0
+    },
+    {
+      "origem": "Serviços próprios prestados por terceiros",
+      "lancamentos": 15,
+      "total": 102600.0
+    },
+    {
+      "origem": "Taxa de Administração de Financiamento Coletivo",
+      "lancamentos": 11,
+      "total": 30177.3
+    },
+    {
+      "origem": "Segurança e prevenção, repressão e combate à violência política",
+      "lancamentos": 3,
+      "total": 18320.19
+    },
+    {
+      "origem": "Materiais de expediente",
+      "lancamentos": 33,
+      "total": 6671.64
+    },
+    {
+      "origem": "Correspondências e despesas postais",
+      "lancamentos": 3,
+      "total": 5903.78
+    },
+    {
+      "origem": "Alimentação",
+      "lancamentos": 11,
+      "total": 3222.0
+    },
+    {
+      "origem": "Água",
+      "lancamentos": 2,
+      "total": 1105.0
+    },
+    {
+      "origem": "Aquisição/Doação de bens móveis ou imóveis",
+      "lancamentos": 2,
+      "total": 467.34
+    },
+    {
+      "origem": "Encargos financeiros, taxas bancárias e/ou op. cartão de crédito",
+      "lancamentos": 100,
+      "total": 389.03
+    },
+    {
+      "origem": "Combustíveis e lubrificantes",
+      "lancamentos": 1,
+      "total": 376.87
+    }
+  ],
+  "por_partido": [
+    {
+      "sigla": "PL",
+      "nome": "PARTIDO LIBERAL",
+      "lancamentos": 145,
+      "total": 55258532.43
+    },
+    {
+      "sigla": "PSD",
+      "nome": "PARTIDO SOCIAL DEMOCRÁTICO",
+      "lancamentos": 55,
+      "total": 24144034.99
+    },
+    {
+      "sigla": "PT",
+      "nome": "PARTIDO DOS TRABALHADORES",
+      "lancamentos": 440,
+      "total": 15468711.14
+    },
+    {
+      "sigla": "NOVO",
+      "nome": "PARTIDO NOVO",
+      "lancamentos": 153,
+      "total": 3338055.19
+    },
+    {
+      "sigla": "MISSÃO",
+      "nome": "PARTIDO MISSÃO",
+      "lancamentos": 144,
+      "total": 858504.61
+    },
+    {
+      "sigla": "DEMOCRATA",
+      "nome": "DEMOCRATA",
+      "lancamentos": 18,
+      "total": 488778.65
+    },
+    {
+      "sigla": "PSTU",
+      "nome": "PARTIDO SOCIALISTA  DOS TRABALHADORES UNIFICADO",
+      "lancamentos": 15,
+      "total": 453107.78
+    },
+    {
+      "sigla": "AVANTE",
+      "nome": "AVANTE",
+      "lancamentos": 39,
+      "total": 265153.77
+    },
+    {
+      "sigla": "PCB",
+      "nome": "PARTIDO COMUNISTA BRASILEIRO",
+      "lancamentos": 5,
+      "total": 7569.72
+    },
+    {
+      "sigla": "PCO",
+      "nome": "PARTIDO DA CAUSA OPERÁRIA",
+      "lancamentos": 1,
+      "total": 137.3
+    },
+    {
+      "sigla": "DC",
+      "nome": "DEMOCRACIA CRISTÃ",
+      "lancamentos": 1,
+      "total": 0.0
+    },
+    {
+      "sigla": "PRTB",
+      "nome": "PARTIDO RENOVADOR TRABALHISTA BRASILEIRO",
+      "lancamentos": 1,
+      "total": 0.0
+    }
+  ],
   "ressalva": "Despesa contratada declarada até a data da carga. Não é o gasto total da campanha.",
   "candidatos": [
     {
